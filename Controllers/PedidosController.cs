@@ -52,9 +52,13 @@ public class PedidosController : BaseController
             
             return CreatedAtAction(nameof(ObterPedido), new { id = pedido.Id }, pedido);
         }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { error = ex.Message });
+        }
         catch (InvalidOperationException ex)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new { error = ex.Message });
         }
     }
 
