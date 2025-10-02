@@ -16,7 +16,7 @@ public class Pedido
     public int Id { get; set; }
     
     // Usando Value Object Documento para validação de CPF/CNPJ
-    public Documento DocumentoCliente { get; private set; } = new("00000000000");
+    public Documento? DocumentoCliente { get; private set; }
     
     [Required]
     [MaxLength(200)]
@@ -89,7 +89,7 @@ public class Pedido
     /// </summary>
     public string ObterDocumentoClienteString()
     {
-        return DocumentoCliente;
+        return DocumentoCliente?.Numero ?? string.Empty;
     }
 
     /// <summary>
@@ -97,6 +97,6 @@ public class Pedido
     /// </summary>
     public string ObterDocumentoFormatado()
     {
-        return DocumentoCliente.NumeroFormatado;
+        return DocumentoCliente?.NumeroFormatado ?? string.Empty;
     }
 }
